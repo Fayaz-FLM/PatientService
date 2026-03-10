@@ -38,6 +38,16 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public RegisterPatientResponseDto regiesterPatient(RegisterPatientRequestDto registerPatientRequestDto) {
 		
+		// Check if email already exists
+		if (patientRepository.existsByPatientEmail(registerPatientRequestDto.getPatientEmail())) {
+			throw new IllegalArgumentException("Email " + registerPatientRequestDto.getPatientEmail() + " is already registered");
+		}
+
+		// Check if phone number already exists
+		if (patientRepository.existsByPatientPhoneNumber(registerPatientRequestDto.getPatientPhoneNumber())) {
+			throw new IllegalArgumentException("Phone number " + registerPatientRequestDto.getPatientPhoneNumber() + " is already registered");
+		}
+
 		Patient patient = PatientBuilder.buildPatientFromRegisterPatientRequestDto(registerPatientRequestDto);
 
 		Patient registedPatient = patientRepository.save(patient);
