@@ -78,8 +78,6 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public RegisterPatientResponseDto getPatientById(String patientId) {
-		// TODO Auto-generated method stub
-		
 		Patient patient=patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
 		
 		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(patient);
