@@ -15,5 +15,9 @@ public interface PatientRepository extends JpaRepository<Patient, String> {
 	String findLastPatientId();
 	
 	List<Patient> findBypatientIdIn(List<String> listOfPatientIds);
+	
+	boolean existsByPatientEmail(String email);
+	
+	boolean existsByPatientPhoneNumber(String phoneNumber);
 
 }
